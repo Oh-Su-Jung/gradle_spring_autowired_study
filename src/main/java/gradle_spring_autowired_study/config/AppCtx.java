@@ -1,5 +1,6 @@
 package gradle_spring_autowired_study.config;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,6 +10,7 @@ import gradle_spring_autowired_study.spring.MemberInfoPrinter;
 import gradle_spring_autowired_study.spring.MemberListPrinter;
 import gradle_spring_autowired_study.spring.MemberPrinter;
 import gradle_spring_autowired_study.spring.MemberRegisterService;
+import gradle_spring_autowired_study.spring.MemberSummaryPrinter;
 import gradle_spring_autowired_study.spring.VersionPrinter;
 
 @Configuration
@@ -20,31 +22,35 @@ public class AppCtx {
 
 	@Bean
 	public MemberRegisterService MemberRegSvc() {
-		return new MemberRegisterService(MemberDao());
+		return new MemberRegisterService();
 	}
 
 	@Bean
 	public ChangePasswordService ChangePwdSvc() {
 		ChangePasswordService pwdSvc = new ChangePasswordService();
-		pwdSvc.setMemberDao(MemberDao());
 		return pwdSvc;
 	}
 	
 	@Bean
-	public MemberPrinter memberPrinter() {
+	@Qualifier("printer")
+	public MemberPrinter memberPrinter1() {
 		return new MemberPrinter();
 	}
 	
 	@Bean
+	@Qualifier("summaryPrinter")
+	public MemberSummaryPrinter memberPrinter2() {
+		return new MemberSummaryPrinter();
+	}
+	
+	@Bean
 	public MemberListPrinter listPrinter() {
-		return new MemberListPrinter(MemberDao(), memberPrinter());
+		return new MemberListPrinter(/*MemberDao(), memberPrinter()*/);
 	}
 	
 	@Bean
 	public MemberInfoPrinter infoPrinter() {
 		MemberInfoPrinter infoPrinter = new MemberInfoPrinter();
-		infoPrinter.setMemDao(MemberDao());
-		infoPrinter.setPrinter(memberPrinter());
 		return infoPrinter;
 	}
 	

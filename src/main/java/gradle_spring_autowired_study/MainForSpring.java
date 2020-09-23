@@ -18,7 +18,7 @@ import gradle_spring_autowired_study.spring.RegisterRequest;
 import gradle_spring_autowired_study.spring.VersionPrinter;
 import gradle_spring_autowired_study.spring.WrongIdPasswordException;
 
-public class MainForAssembler {
+public class MainForSpring {
 	private static ApplicationContext ctx = null;
 
 	public static void main(String[] args) throws IOException {

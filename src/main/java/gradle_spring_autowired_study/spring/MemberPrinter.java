@@ -1,8 +1,35 @@
 package gradle_spring_autowired_study.spring;
 
+import java.time.format.DateTimeFormatter;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 public class MemberPrinter {
+	private DateTimeFormatter dateTimeFormatter;
+	
+	public MemberPrinter() {
+		dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyë…„ MMì›” ddì¼");
+	}
+
 	public void print(Member member) {
-		System.out.printf("?šŒ?› ? •ë³? : ?•„?´?”” = %d, ?´ë©”ì¼ = %s, ?´ë¦? = %s, ?“±ë¡ì¼ = %tF\n",
-				member.getId(), member.getEmail(), member.getName(), member.getRegisterDateTime());
+		if (dateTimeFormatter == null) {
+			System.out.printf("íšŒì› ì •ë³´ : ì•„ì´ë”” = %d, ì´ë©”ì¼ = %s, ì´ë¦„ = %s, ë“±ë¡ì¼ = %tF\n",
+					member.getId(), member.getEmail(), member.getName(), member.getRegisterDateTime());	
+		} else {
+			System.out.printf("íšŒì› ì •ë³´ : ì•„ì´ë”” = %d, ì´ë©”ì¼ = %s, ì´ë¦„ = %s, ë“±ë¡ì¼ = %tF\n",
+					member.getId(), member.getEmail(), member.getName(), dateTimeFormatter.format(member.getRegisterDateTime()));
+		}
+	}
+	
+	@Autowired
+	public void setDateTimeformatter(Optional<DateTimeFormatter> dateTimeformatter) {
+		//this.dateTimeFormatter = dateTimeformatter;
+		if (dateTimeformatter.isPresent()) {
+			this.dateTimeFormatter = dateTimeformatter.get();
+		} else {
+			this.dateTimeFormatter = null;
+		}
+
 	}
 }

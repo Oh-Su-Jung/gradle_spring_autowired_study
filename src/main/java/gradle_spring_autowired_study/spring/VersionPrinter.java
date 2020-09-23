@@ -5,7 +5,7 @@ public class VersionPrinter {
 	private int minorVersion;
 	
 	public void print() {
-		System.out.printf("?´ ?”„ë¡œê·¸?¨?˜ ë²„ì „?? %d.%d?…?‹ˆ?‹¤. \n\n", majorVersion, minorVersion);
+		System.out.printf("ì´ í”„ë¡œê·¸ë¨ì˜ ë²„ì „ì€ %d.%dì…ë‹ˆë‹¤. \n\n", majorVersion, minorVersion);
 	}
 
 	public void setMajorVersion(int majorVersion) {
